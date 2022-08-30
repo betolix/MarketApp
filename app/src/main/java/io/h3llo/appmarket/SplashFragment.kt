@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import io.h3llo.appmarket.databinding.FragmentSplashBinding
 
 
@@ -22,6 +23,12 @@ class SplashFragment : Fragment() {
         //ViewBindings
         binding
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_loginFragment)
     }
 
 }

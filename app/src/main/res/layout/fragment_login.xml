@@ -61,11 +61,12 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/help_email" />
+            android:hint="@string/help_email"
+            android:text="pperez@market2021.com"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
+        android:id="@+id/edtClave"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -77,11 +78,11 @@
         app:layout_constraintTop_toBottomOf="@+id/edtCorreo">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtClave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/help_password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="12345"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -92,9 +93,9 @@
         android:backgroundTint="@color/background"
         android:text="@string/enter"
         app:cornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+        app:layout_constraintEnd_toEndOf="@+id/edtClave"
+        app:layout_constraintStart_toStartOf="@+id/edtClave"
+        app:layout_constraintTop_toBottomOf="@+id/edtClave" />
 
     <Switch
         android:id="@+id/switch1"
@@ -104,15 +105,15 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/btnIngresar" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/remember_account"
-        android:textColor="@color/subtitle"
-        app:layout_constraintBottom_toBottomOf="@+id/switch1"
-        app:layout_constraintTop_toTopOf="@+id/switch1"
-        tools:layout_editor_absoluteX="208dp" />
+  <TextView
+      android:id="@+id/textView2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/remember_account"
+      android:textColor="@color/subtitle"
+      app:layout_constraintBottom_toBottomOf="@+id/switch1"
+      app:layout_constraintStart_toEndOf="@+id/switch1"
+      app:layout_constraintTop_toTopOf="@+id/switch1" />
 
     <TextView
         android:id="@+id/textView3"

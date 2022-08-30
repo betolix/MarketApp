@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-class Api {
+object  Api {
 
     // URL COMPLETA https://marketapp2021.herokuapp.com/api/usuarios/login
     // URL BASE: https://marketapp2021.herokuapp.com/
