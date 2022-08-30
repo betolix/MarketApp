@@ -8,3 +8,8 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext{
+    retrofit2='2.6.0'
+    gsonConverter='2.6.0'
+}
