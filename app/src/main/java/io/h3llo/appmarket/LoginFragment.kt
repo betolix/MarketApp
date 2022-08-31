@@ -10,9 +10,14 @@ import io.h3llo.appmarket.data.Api
 import io.h3llo.appmarket.databinding.FragmentLoginBinding
 import io.h3llo.appmarket.model.LoginDto
 import io.h3llo.appmarket.model.LoginRequest
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 
 
 class LoginFragment : Fragment() {
@@ -40,6 +45,7 @@ class LoginFragment : Fragment() {
         val password = edtClave.editText?.text.toString()
 
         // USAR RETROFIT
+        /*
         val response = Api.build().autenticar(LoginRequest(email,password,""))
         response.enqueue(object : Callback<LoginDto>{
             override fun onResponse(call: Call<LoginDto>, response: Response<LoginDto>) {
@@ -51,6 +57,8 @@ class LoginFragment : Fragment() {
                     loginDto?.let {
                         Toast.makeText(requireContext(),response.code().toString()+ " " + it.message, Toast.LENGTH_SHORT).show()
                     }
+
+                    println("Hola RETROFIT")
 
 
                 }else{ // 400, 401, 500
@@ -70,7 +78,42 @@ class LoginFragment : Fragment() {
 
         })
 
+        println("Hola FUERA DE RETROFIT")
+        */
+
         // USAR COROUTINAS
+
+        GlobalScope.launch(Dispatchers.Main)  {
+            // HILO MAIN
+            try{
+                val response = withContext(Dispatchers.IO){
+                    // HILO APARTE - TAREAS DE DURACION LARGA
+                    Api.build().autenticar(LoginRequest(email,password,""))
+                }
+
+                // HILO MAIN
+                if(response.isSuccessful){ // 200
+                    val loginDto = response.body()
+                    // LET
+                    loginDto?.let {
+                        Toast.makeText(requireContext(),response.code().toString()+ " " + it.message, Toast.LENGTH_SHORT).show()
+                    }
+                }else{ // 400, 401, 500
+                    if(response.code() == 401){ // NO AUTORIZADO
+
+                    } else {
+
+                    }
+                    Toast.makeText(requireContext(),response.code().toString() + " " + response.message().toString(), Toast.LENGTH_SHORT).show()
+                }
+            } catch (ex: Exception){
+                Toast.makeText(requireContext(), ex.message,Toast.LENGTH_SHORT).show()
+            }
+
+
+
+
+        }
 
 
         // MVVM

@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import io.h3llo.appmarket.model.LoginDto
 import io.h3llo.appmarket.model.LoginRequest
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
@@ -25,7 +26,7 @@ object  Api {
     interface ApiInterface {
         // DEFINE EL QUE VAS A HACER
         @POST("api/usuarios/login")
-        fun autenticar(@Body request:LoginRequest) : Call<LoginDto>
+        suspend fun autenticar(@Body request:LoginRequest) : Response<LoginDto>
     }
 
     // 3. DEVOLVER LA INSTANCIA
