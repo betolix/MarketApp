@@ -28,7 +28,7 @@ class ViewModelActivity : AppCompatActivity() {
         // viewModel = ViewModelProvider(this).get(OperacionViewModel::class.java)
 
         // SUSCRIBIENDO AL VIEWMODEL
-        viewModel._number.observe(this, Observer { numero ->
+        viewModel.number.observe(this, Observer { numero ->
             binding.tvNumero.text = "$numero"
         })
 
