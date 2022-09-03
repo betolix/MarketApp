@@ -1,29 +1,21 @@
-package io.h3llo.appmarket
+package io.h3llo.appmarket.ui.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import io.h3llo.appmarket.data.Api
+import androidx.fragment.app.viewModels
 import io.h3llo.appmarket.databinding.FragmentLoginBinding
-import io.h3llo.appmarket.model.LoginDto
-import io.h3llo.appmarket.model.LoginRequest
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.lang.Exception
 
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel : LoginViewModel by viewModels()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -43,6 +35,8 @@ class LoginFragment : Fragment() {
     private fun authCredentials() = with(binding) {
         val email = edtCorreo.editText?.text.toString()
         val password = edtClave.editText?.text.toString()
+
+        viewModel.auth(email, password)
 
         // USAR RETROFIT
         /*
@@ -82,6 +76,7 @@ class LoginFragment : Fragment() {
         */
 
         // USAR COROUTINAS
+        /*
 
         GlobalScope.launch(Dispatchers.Main)  {
             // HILO MAIN
@@ -110,13 +105,12 @@ class LoginFragment : Fragment() {
                 Toast.makeText(requireContext(), ex.message,Toast.LENGTH_SHORT).show()
             }
 
-
-
-
         }
 
+         */
 
         // MVVM
+
 
 
     }

@@ -3,6 +3,7 @@ package io.h3llo.appmarket.data
 import com.google.gson.Gson
 import io.h3llo.appmarket.model.LoginDto
 import io.h3llo.appmarket.model.LoginRequest
+import io.h3llo.appmarket.util.Constantes
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -19,7 +20,7 @@ object  Api {
 
     // 1. CREAR INSTANCIA DE RETROFIT
     private val builder : Retrofit.Builder = Retrofit.Builder()
-        .baseUrl("https://marketapp2021.herokuapp.com/")
+        .baseUrl(Constantes.URL_BASE)
         .addConverterFactory(GsonConverterFactory.create())
 
     // 2. DEFINIR LOS METODOS QUE USAREMOS (INTERFACES)

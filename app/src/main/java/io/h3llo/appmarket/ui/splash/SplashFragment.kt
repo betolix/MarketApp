@@ -1,4 +1,4 @@
-package io.h3llo.appmarket
+package io.h3llo.appmarket.ui.splash
 
 import android.os.Bundle
 import android.os.Handler
@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import io.h3llo.appmarket.R
 import io.h3llo.appmarket.databinding.FragmentSplashBinding
 
 
