@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import io.h3llo.appmarket.databinding.FragmentLoginBinding
 
 
@@ -29,6 +31,25 @@ class LoginFragment : Fragment() {
         binding.btnIngresar.setOnClickListener{
             authCredentials()
         }
+
+        viewModel.loader.observe(viewLifecycleOwner, Observer { condition ->
+            if(condition)binding.progressBar.visibility = View.VISIBLE
+            else binding.progressBar.visibility = View.GONE
+        })
+
+        viewModel.error.observe(viewLifecycleOwner, Observer{ error ->
+             Toast.makeText(requireContext(), error,Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel.token.observe(viewLifecycleOwner, Observer{ token ->
+            // GUARDAR EL TOKEN LOCALMENTE ENCRIPTADO
+            Toast.makeText(requireContext(), token,Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel.user.observe(viewLifecycleOwner, Observer{ user  ->
+            // NAVEGAR HACIA EL MENU
+            Toast.makeText(requireContext(), user.nombres,Toast.LENGTH_SHORT).show()
+        })
 
     }
 
