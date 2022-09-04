@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import io.h3llo.appmarket.core.SecurityPreferences.encryptPreferences
+import io.h3llo.appmarket.core.SecurityPreferences.saveToken
 import io.h3llo.appmarket.databinding.FragmentLoginBinding
 import io.h3llo.appmarket.util.Constantes
 import java.security.KeyStore
@@ -45,12 +47,18 @@ class LoginFragment : Fragment() {
 
         viewModel.token.observe(viewLifecycleOwner, Observer{ token ->
             // GUARDAR EL TOKEN LOCALMENTE ENCRIPTADO
-            Toast.makeText(requireContext(), token,Toast.LENGTH_SHORT).show()
+            // Toast.makeText(requireContext(), token,Toast.LENGTH_SHORT).show()
 
+            /*
             requireContext().
                 getSharedPreferences(Constantes.PREFERENCES_TOKEN,0).
                 edit().
                 putString(Constantes.TOKEN_KEY,token).apply()
+                */
+
+            saveToken(token,requireContext().encryptPreferences(Constantes.PREFERENCES_TOKEN))
+
+
         })
 
         viewModel.user.observe(viewLifecycleOwner, Observer{ user  ->

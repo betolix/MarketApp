@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "io.h3llo.appmarket"
-        minSdk 21
+        minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -52,5 +52,8 @@ dependencies {
     // VIEWMODEL
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
     //implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
+
+    // ENCRYPT SHARED PREFERENCES
+    implementation "androidx.security:security-crypto:1.0.0-alpha02"
 
 }
