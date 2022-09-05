@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import io.h3llo.appmarket.R
 import io.h3llo.appmarket.core.SecurityPreferences.encryptPreferences
 import io.h3llo.appmarket.core.SecurityPreferences.saveToken
 import io.h3llo.appmarket.databinding.FragmentLoginBinding
@@ -32,40 +34,49 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnIngresar.setOnClickListener{
+        events()
+        observablesSetup()
+    }
+
+    private fun events() = with(binding) {
+        btnIngresar.setOnClickListener{
             authCredentials()
         }
 
+        tvCrearCuenta.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
+    }
+
+    private fun observablesSetup() {
         viewModel.loader.observe(viewLifecycleOwner, Observer { condition ->
             if(condition)binding.progressBar.visibility = View.VISIBLE
             else binding.progressBar.visibility = View.GONE
         })
 
         viewModel.error.observe(viewLifecycleOwner, Observer{ error ->
-             Toast.makeText(requireContext(), error,Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), error,Toast.LENGTH_SHORT).show()
         })
 
         viewModel.token.observe(viewLifecycleOwner, Observer{ token ->
             // GUARDAR EL TOKEN LOCALMENTE ENCRIPTADO
             // Toast.makeText(requireContext(), token,Toast.LENGTH_SHORT).show()
-
             /*
             requireContext().
                 getSharedPreferences(Constantes.PREFERENCES_TOKEN,0).
                 edit().
                 putString(Constantes.TOKEN_KEY,token).apply()
                 */
-
             saveToken(token,requireContext().encryptPreferences(Constantes.PREFERENCES_TOKEN))
-
-
         })
 
         viewModel.user.observe(viewLifecycleOwner, Observer{ user  ->
             // NAVEGAR HACIA EL MENU
+            // TODO NAVEGAR A LA OTRA PANTALLA
+
             Toast.makeText(requireContext(), user.nombres,Toast.LENGTH_SHORT).show()
         })
-
     }
 
     private fun authCredentials() = with(binding) {
