@@ -10,6 +10,12 @@
     <string name="create_account">Crear cuenta</string>
     <string name="forgot_password">Olvidé mi contraseña</string>
     <string name="terms">Nuestras políticas de privacidad, términos y condiciones</string>
+    <string name="register_crear_cuenta">Crear Cuenta</string>
+    <string name="register_apellidos">Apellidos</string>
+    <string name="register_correo">Correo electrónico</string>
+    <string name="register_celular">Número celular</string>
+    <string name="register_numero_documento">Número de documento</string>
+    <string name="register_clave">Contraseña</string>
 
 
 </resources>

@@ -14,4 +14,5 @@
 
     <color name="textos">#0B8138</color>
     <color name="subtitle">#555555</color>
+    <color name="background_views">#F5F6FA</color>
 </resources>

@@ -1,4 +1,4 @@
-package io.h3llo.appmarket
+package io.h3llo.appmarket.ui.register
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
