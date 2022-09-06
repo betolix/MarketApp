@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="io.h3llo.appmarket.RegisterFragment"
+        android:name="io.h3llo.appmarket.ui.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
 </navigation>
