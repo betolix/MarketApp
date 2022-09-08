@@ -48,6 +48,8 @@ dependencies {
     // RETROFIT
     implementation "com.squareup.retrofit2:retrofit:$retrofit2"
     implementation "com.squareup.retrofit2:converter-gson:$gsonConverter"
+    // INTERCEPTOR
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.2"
 
     // VIEWMODEL
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
@@ -57,6 +59,7 @@ dependencies {
     implementation "androidx.security:security-crypto:1.0.0-alpha02"
 
     // KROGRESSHUD
-    // implementation 'com.kaopiz:kprogresshud:1.2.0'
+    //implementation 'com.kaopiz:kprogresshud:1.2.0'
+    //implementation 'com.github.Kaopiz:KProgressHUD:1.0'
 
 }

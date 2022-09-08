@@ -21,6 +21,17 @@ data class Usuario (
     val tipo:String,
 )
 
+data class Genero(
+    @SerializedName("genero")
+    val genero:String,
+    @SerializedName("descripcion")
+    val descripcion: String
+){
+    override fun toString(): String{
+        return descripcion
+    }
+}
+
 class Persona constructor(var nombres:String="", apellidos:String=""){
     constructor(apellidos: String):this("", apellidos)
 

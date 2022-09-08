@@ -11,6 +11,14 @@ data class LoginDto (
     @SerializedName("token")
     val token: String,
     @SerializedName("data")
-    val data:Usuario
-)  {
+    val data:Usuario)  {
 }
+
+data class GeneroDto(
+    @SerializedName("success")
+    val success:Boolean,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: List<Genero>
+)
