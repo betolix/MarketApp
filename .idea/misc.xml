@@ -9,7 +9,7 @@
         <entry key="app/src/main/res/drawable/icon_back.xml" value="0.302" />
         <entry key="app/src/main/res/drawable/style_spinner.xml" value="0.5605" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5651041666666666" />
-        <entry key="app/src/main/res/layout/activity_main_menu.xml" value="0.5791666666666667" />
+        <entry key="app/src/main/res/layout/activity_main_menu.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_view_model.xml" value="0.5221920289855072" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.5791666666666667" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.5" />
