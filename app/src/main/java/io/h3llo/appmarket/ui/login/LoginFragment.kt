@@ -43,10 +43,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun init() {
-        val token = getToken(requireContext().encryptPreferences(Constantes.PREFERENCES_TOKEN))
-        if(!token.isEmpty()){
-            startActivity(Intent(requireContext(),MainMenuActivity::class.java))
-        }
+
     }
 
     private fun events() = with(binding) {
