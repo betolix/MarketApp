@@ -1,5 +1,6 @@
 package io.h3llo.appmarket.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import io.h3llo.appmarket.MainMenuActivity
 import io.h3llo.appmarket.R
 import io.h3llo.appmarket.core.SecurityPreferences.encryptPreferences
 import io.h3llo.appmarket.core.SecurityPreferences.saveToken
@@ -73,7 +75,9 @@ class LoginFragment : Fragment() {
 
         viewModel.user.observe(viewLifecycleOwner, Observer{ user  ->
             // NAVEGAR HACIA EL MENU
-            // TODO NAVEGAR A LA OTRA PANTALLA
+            user?.let{
+                startActivity(Intent(requireContext(), MainMenuActivity::class.java))
+            }
 
             Toast.makeText(requireContext(), user.nombres,Toast.LENGTH_SHORT).show()
         })
