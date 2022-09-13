@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import io.h3llo.appmarket.MainMenuActivity
 import io.h3llo.appmarket.R
 import io.h3llo.appmarket.core.SecurityPreferences.encryptPreferences
+import io.h3llo.appmarket.core.SecurityPreferences.getToken
 import io.h3llo.appmarket.core.SecurityPreferences.saveToken
 import io.h3llo.appmarket.databinding.FragmentLoginBinding
 import io.h3llo.appmarket.util.Constantes
@@ -36,8 +37,16 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        init()
         events()
         observablesSetup()
+    }
+
+    private fun init() {
+        val token = getToken(requireContext().encryptPreferences(Constantes.PREFERENCES_TOKEN))
+        if(!token.isEmpty()){
+            startActivity(Intent(requireContext(),MainMenuActivity::class.java))
+        }
     }
 
     private fun events() = with(binding) {
