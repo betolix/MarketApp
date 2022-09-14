@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/categoriesFragment"
-        android:name="io.h3llo.appmarket.CategoriesFragment"
+        android:name="io.h3llo.appmarket.ui.categories.CategoriesFragment"
         android:label="fragment_categories"
         tools:layout="@layout/fragment_categories" />
     <fragment
         android:id="@+id/misComprasFragment"
-        android:name="io.h3llo.appmarket.MisComprasFragment"
+        android:name="io.h3llo.appmarket.ui.cart.MisComprasFragment"
         android:label="fragment_mis_compras"
         tools:layout="@layout/fragment_mis_compras"/>
 </navigation>
