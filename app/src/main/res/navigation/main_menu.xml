@@ -10,4 +10,9 @@
         android:name="io.h3llo.appmarket.CategoriesFragment"
         android:label="fragment_categories"
         tools:layout="@layout/fragment_categories" />
+    <fragment
+        android:id="@+id/misComprasFragment"
+        android:name="io.h3llo.appmarket.MisComprasFragment"
+        android:label="fragment_mis_compras"
+        tools:layout="@layout/fragment_mis_compras"/>
 </navigation>

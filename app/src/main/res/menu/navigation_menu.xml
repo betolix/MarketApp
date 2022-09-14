@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/categoriesFragment"
+        android:icon="@drawable/icono_inicio"
+        android:title="Inicio">
+    </item>
+    <item
+        android:id="@+id/misComprasFragment"
+        android:icon="@drawable/icono_inicio"
+        android:title="Mis Compras">
+    </item>
+</menu>
