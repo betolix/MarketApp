@@ -32,6 +32,15 @@ data class Genero(
     }
 }
 
+data class Categoria(
+    @SerializedName("cover")
+    val cover: String,
+    @SerializedName("nombre")
+    val nombre:String,
+    @SerializedName("uuid")
+    val uuid:String
+)
+
 class Persona constructor(var nombres:String="", apellidos:String=""){
     constructor(apellidos: String):this("", apellidos)
 

@@ -22,3 +22,13 @@ data class GeneroDto(
     @SerializedName("data")
     val data: List<Genero>
 )
+
+data class CategoriaDto(
+    @SerializedName("success")
+    val success:Boolean,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data:List<Categoria>
+
+)

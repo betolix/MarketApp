@@ -59,8 +59,11 @@ dependencies {
     // ENCRYPT SHARED PREFERENCES
     implementation "androidx.security:security-crypto:1.0.0-alpha02"
 
-    // KROGRESSHUD
+    // KROGRESSHUD - NO FUNCIONA
     //implementation 'com.kaopiz:kprogresshud:1.2.0'
     //implementation 'com.github.Kaopiz:KProgressHUD:1.0'
+
+    // PICASSO
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }

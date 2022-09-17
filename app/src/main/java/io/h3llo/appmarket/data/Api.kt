@@ -1,10 +1,7 @@
 package io.h3llo.appmarket.data
 
 import com.google.gson.Gson
-import io.h3llo.appmarket.model.CrearCuentaRequest
-import io.h3llo.appmarket.model.GeneroDto
-import io.h3llo.appmarket.model.LoginDto
-import io.h3llo.appmarket.model.LoginRequest
+import io.h3llo.appmarket.model.*
 import io.h3llo.appmarket.util.Constantes
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,6 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 object  Api {
@@ -47,6 +45,9 @@ object  Api {
 
         @POST("/api/usuarios/crear-cuenta")
         suspend fun crearCuenta(@Body request: CrearCuentaRequest) : Response<LoginDto>
+
+        @GET("api/categorias")
+        suspend fun obtenerCategorias(@Header("Authorization") authorization:String):Response<CategoriaDto>
     }
 
     // 3. DEVOLVER LA INSTANCIA
