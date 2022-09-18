@@ -16,6 +16,8 @@
     <string name="register_celular">Número celular</string>
     <string name="register_numero_documento">Número de documento</string>
     <string name="register_clave">Contraseña</string>
+    <string name="Aceptar" />
+    <string name="no_autorizado_aceptar">Aceptar</string>
 
 
 </resources>
