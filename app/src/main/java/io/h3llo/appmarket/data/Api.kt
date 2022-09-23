@@ -9,10 +9,7 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 object  Api {
 
@@ -48,6 +45,18 @@ object  Api {
 
         @GET("api/categorias")
         suspend fun obtenerCategorias(@Header("Authorization") authorization:String):Response<CategoriaDto>
+
+        // https://marketapp2021.herokuapp.com/api/categorias?usuario=jledesma&claveclave=123&firebaseToken=3
+        /*
+        @GET("https://marketapp2021.herokuapp.com/api/categorias")
+        suspend fun obtenerProductos(@Query("usuario") usuario:String,
+                                     @Query("clave") clave:String,
+                                     @Query("firebaseToken") firebaseToken:String)
+        */
+
+        @GET("/api/categorias/{categoriaId}/productos")
+        suspend fun obtenerProductos(@Header("Authorization")authorization:String,
+                                     @Path("categoriaId") categoriaId:String) : Response<ProductoDto>
     }
 
     // 3. DEVOLVER LA INSTANCIA

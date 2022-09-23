@@ -12,7 +12,11 @@ import io.h3llo.appmarket.model.Categoria
 // 1. Definir donde va a estar la data
 
 // 3. Metodos del adaptador: onCreateViewHolder, onBindViewHolder, getItemCount
-class CategoriaAdapter constructor( var categories:List<Categoria> = listOf()) : RecyclerView.Adapter<CategoriaAdapter.CategoriaAdapterViewHolder>(){
+class CategoriaAdapter constructor( var categories:List<Categoria> = listOf(),
+                                    var onClickCategorie : (Categoria) -> Unit ) : RecyclerView.Adapter<CategoriaAdapter.CategoriaAdapterViewHolder>(){
+
+    // UNA VARIABLE DE ESTE TIPO PARA CADE EVENTO
+    // lateinit var onClickCategorie : (Categoria) -> Unit
 
     // 2. Definir una clase interna viewHolder
     // XML (item)
@@ -24,6 +28,12 @@ class CategoriaAdapter constructor( var categories:List<Categoria> = listOf()) :
         fun bind(categoria:Categoria){
 
             Picasso.get().load(categoria.cover).into(binding.imgCategories)
+
+            binding.imgCategories.setOnClickListener{
+                // NAVEGAR
+                onClickCategorie(categoria)
+
+            }
         }
     }
 

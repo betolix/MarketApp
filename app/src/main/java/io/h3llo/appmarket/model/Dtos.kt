@@ -30,5 +30,10 @@ data class CategoriaDto(
     val message: String,
     @SerializedName("data")
     val data:List<Categoria>
+)
 
+data class ProductoDto(
+    val data: List<Producto>,
+    val message: String,
+    val success: Boolean
 )

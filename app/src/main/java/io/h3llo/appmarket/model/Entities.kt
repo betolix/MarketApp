@@ -41,6 +41,16 @@ data class Categoria(
     val uuid:String
 )
 
+data class Producto(
+    val caracteristicas: String,
+    val codigo: String,
+    val descripcion: String,
+    val imagenes: List<String>,
+    val precio: Double,
+    val stock: Int,
+    val uuid: String
+)
+
 class Persona constructor(var nombres:String="", apellidos:String=""){
     constructor(apellidos: String):this("", apellidos)
 

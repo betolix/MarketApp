@@ -21,7 +21,11 @@
         tools:layout="@layout/fragment_mis_compras"/>
     <fragment
         android:id="@+id/productsFragment"
-        android:name="io.h3llo.appmarket.ProductsFragment"
+        android:name="io.h3llo.appmarket.ui.products.ProductsFragment"
         android:label="fragment_products"
-        tools:layout="@layout/fragment_products" />
+        tools:layout="@layout/fragment_products" >
+        <argument
+            android:name="uuid"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package io.h3llo.appmarket.ui.categories
+package io.h3llo.appmarket.ui.products
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -9,59 +9,69 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
+import androidx.lifecycle.ViewModel
+import com.squareup.picasso.Picasso
 import io.h3llo.appmarket.MainActivity
-import io.h3llo.appmarket.MainMenuActivity
+
 import io.h3llo.appmarket.R
+import io.h3llo.appmarket.core.BaseAdapter
 import io.h3llo.appmarket.core.Message.toast
 import io.h3llo.appmarket.core.SecurityPreferences
 import io.h3llo.appmarket.core.SecurityPreferences.encryptPreferences
-import io.h3llo.appmarket.core.SecurityPreferences.getToken
-import io.h3llo.appmarket.databinding.FragmentCategoriesBinding
-import io.h3llo.appmarket.databinding.FragmentLoginBinding
+import io.h3llo.appmarket.databinding.FragmentProductsBinding
+import io.h3llo.appmarket.databinding.ItemProductBinding
 import io.h3llo.appmarket.databinding.NoAutorizadoDialogBinding
+import io.h3llo.appmarket.model.Categoria
+import io.h3llo.appmarket.model.Producto
 import io.h3llo.appmarket.util.Constantes
 
 
-class CategoriesFragment : Fragment() {
+class ProductsFragment : Fragment() {
 
-    private var _binding: FragmentCategoriesBinding? = null
+    private var _binding : FragmentProductsBinding? = null
     private val binding get() = _binding!!
 
-    // private lateinit var adaptador: CategoriaAdapter
-    private val adaptador by lazy{
-        CategoriaAdapter(){ categorie ->
-            // categorie.uuid
+    private val viewModel : ProductsViewModel by viewModels()
 
-            // Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_registerFragment)
-            // ORIGEN -> NOMBRECLASE + DIRECTIONS
-            val directions = CategoriesFragmentDirections.actionCategoriesFragmentToProductsFragment(categorie.uuid)
-            Navigation.findNavController(binding.root).navigate(directions)
+    private val adapter : BaseAdapter<Producto> = object : BaseAdapter<Producto>(emptyList()){
+        override fun getViewHolder(parent: ViewGroup): BaseViewHolder<Producto> {
+            val view:View = LayoutInflater.from(parent.context).inflate(R.layout.item_product,parent,false)
+            return object : BaseAdapter.BaseViewHolder<Producto>(view){
 
+                private val binding : ItemProductBinding = ItemProductBinding.bind(view)
+
+                override fun bind(entity: Producto) = with(binding) {
+                    tvCodigo.text = entity.codigo
+                    tvDescripcion.text = entity.descripcion
+                    tvPrecio.text = entity.precio.toString()
+                    Picasso.get().load(entity.imagenes[0]).error(R.drawable.product_error).into(imgProducto)
+                }
+
+            }
         }
+
     }
 
 
-    private val viewModel : CategoriaViewModel by viewModels()
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentCategoriesBinding.inflate(inflater, container, false )
-        return _binding?.root
+        _binding = FragmentProductsBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupAdapter()
-        loadData()
+        init()
+        adapterSetup()
         observablesSetup()
     }
 
+    private fun adapterSetup() {
+        binding.rvProducts.adapter = adapter
+    }
+
     private fun observablesSetup() {
-        viewModel.categories.observe(viewLifecycleOwner, Observer{ categorias ->
-            adaptador.updateCategories(categorias)
-        })
 
         viewModel.loader.observe(viewLifecycleOwner, Observer { condition ->
             if(condition)binding.progressBar.visibility = View.VISIBLE
@@ -81,23 +91,22 @@ class CategoriesFragment : Fragment() {
 
             showMessage(message).show()
         })
+
+        viewModel.products.observe(viewLifecycleOwner, Observer{ products ->
+
+            adapter.update(products)
+
+        })
     }
 
-    private fun loadData() {
+    fun init() {
+        // DESTINO -> NOMBRECLASE + ARGS
+        arguments?.let{ bundle ->
+            val token = SecurityPreferences.getToken(requireContext().encryptPreferences(Constantes.PREFERENCES_TOKEN))
+            val uuid = ProductsFragmentArgs.fromBundle(bundle).uuid
+            viewModel.getProducts(token, uuid)
+        }
 
-        val token = getToken(requireContext().encryptPreferences(Constantes.PREFERENCES_TOKEN))
-
-        viewModel.obtenerCategorias(token)
-    }
-
-    private fun setupAdapter() {
-
-    //  adaptador = CategoriaAdapter()
-    //  CategoriaAdapter()
-        binding.rvCategories.adapter = adaptador
-
-    //    adaptador.onClickCategorie = {categorie ->
-    //    }
     }
 
     private fun showMessage(mensaje:String): AlertDialog {
@@ -118,6 +127,7 @@ class CategoriesFragment : Fragment() {
         return alertDialog
 
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
