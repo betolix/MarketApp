@@ -1,6 +1,7 @@
 package io.h3llo.appmarket.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Usuario (
     @SerializedName("uuid")
@@ -49,7 +50,7 @@ data class Producto(
     val precio: Double,
     val stock: Int,
     val uuid: String
-)
+) : Serializable
 
 class Persona constructor(var nombres:String="", apellidos:String=""){
     constructor(apellidos: String):this("", apellidos)

@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/productContainer"
         android:layout_width="188dp"
         android:layout_height="200dp"
         android:layout_marginTop="8dp"

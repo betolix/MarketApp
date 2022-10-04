@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.navigation.Navigation
 import com.squareup.picasso.Picasso
 import io.h3llo.appmarket.MainActivity
 
@@ -45,6 +46,10 @@ class ProductsFragment : Fragment() {
                     tvDescripcion.text = entity.descripcion
                     tvPrecio.text = entity.precio.toString()
                     Picasso.get().load(entity.imagenes[0]).error(R.drawable.product_error).into(imgProducto)
+
+                    binding.productContainer.setOnClickListener{
+                        onItemSelected(entity)
+                    }
                 }
 
             }
@@ -52,6 +57,11 @@ class ProductsFragment : Fragment() {
 
     }
 
+    private fun onItemSelected(entity : Producto){
+        val directions = ProductsFragmentDirections.actionProductsFragmentToProductDetailFragment(entity)
+        Navigation.findNavController(binding.root).navigate(directions)
+
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
