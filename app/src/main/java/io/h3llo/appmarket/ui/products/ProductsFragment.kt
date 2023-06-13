@@ -34,6 +34,8 @@ class ProductsFragment : Fragment() {
 
     private val viewModel : ProductsViewModel by viewModels()
 
+    private var uuidCategory = ""
+
     private val adapter : BaseAdapter<Producto> = object : BaseAdapter<Producto>(emptyList()){
         override fun getViewHolder(parent: ViewGroup): BaseViewHolder<Producto> {
             val view:View = LayoutInflater.from(parent.context).inflate(R.layout.item_product,parent,false)
@@ -58,7 +60,7 @@ class ProductsFragment : Fragment() {
     }
 
     private fun onItemSelected(entity : Producto){
-        val directions = ProductsFragmentDirections.actionProductsFragmentToProductDetailFragment(entity)
+        val directions = ProductsFragmentDirections.actionProductsFragmentToProductDetailFragment(entity, uuidCategory)
         Navigation.findNavController(binding.root).navigate(directions)
 
     }
@@ -113,8 +115,8 @@ class ProductsFragment : Fragment() {
         // DESTINO -> NOMBRECLASE + ARGS
         arguments?.let{ bundle ->
             val token = SecurityPreferences.getToken(requireContext().encryptPreferences(Constantes.PREFERENCES_TOKEN))
-            val uuid = ProductsFragmentArgs.fromBundle(bundle).uuid
-            viewModel.getProducts(token, uuid)
+            uuidCategory = ProductsFragmentArgs.fromBundle(bundle).uuid
+            viewModel.getProducts(token, uuidCategory)
         }
 
     }

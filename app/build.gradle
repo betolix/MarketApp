@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     // SAFE ARGS
     id 'androidx.navigation.safeargs.kotlin'
+    // KAPT-ROOM
+    id 'kotlin-kapt'
 }
 
 android {
@@ -67,5 +69,10 @@ dependencies {
 
     // PICASSO
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //ROOM
+    implementation 'androidx.room:room-ktx:2.4.3'
+    implementation "androidx.room:room-runtime:2.4.3"
+    kapt "androidx.room:room-compiler:2.4.3"
 
 }

@@ -1,23 +1,37 @@
-package io.h3llo.appmarket
+package io.h3llo.appmarket.ui.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.squareup.picasso.Picasso
+import io.h3llo.appmarket.R
 import io.h3llo.appmarket.core.BaseAdapter
+import io.h3llo.appmarket.core.Message.toast
+import io.h3llo.appmarket.core.SecurityPreferences
+import io.h3llo.appmarket.core.SecurityPreferences.encryptPreferences
 import io.h3llo.appmarket.databinding.FragmentProductDetailBinding
-import io.h3llo.appmarket.databinding.FragmentProductsBinding
 import io.h3llo.appmarket.databinding.ItemImagesBinding
-import io.h3llo.appmarket.databinding.ItemProductBinding
+import io.h3llo.appmarket.model.Carrito
 import io.h3llo.appmarket.model.Producto
+import io.h3llo.appmarket.util.Constantes
 
 
 class ProductDetailFragment : Fragment() {
 
     private var _binding: FragmentProductDetailBinding? = null
     private val binding get() = _binding!!
+
+    // SUSCRIBIMOS EL FRAGMENTO AL VIEWMODEL
+    private val viewModel : DetailViewModel by viewModels()
+
+    private lateinit var product: Producto
+
+    private var uuidCategory = ""
 
     private val adapter: BaseAdapter<String> = object : BaseAdapter<String>(emptyList()) {
         override fun getViewHolder(parent: ViewGroup): BaseViewHolder<String> {
@@ -53,7 +67,55 @@ class ProductDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         init()
+        events()
         setupAdapter()
+        observablesSetup()
+
+    }
+
+    private fun observablesSetup() = with(binding) {
+        viewModel.loader.observe(viewLifecycleOwner, Observer { condition ->
+            if(condition)binding.progressBar.visibility = View.VISIBLE
+            else binding.progressBar.visibility = View.GONE
+        })
+
+        viewModel.error.observe(viewLifecycleOwner, Observer { error ->
+            requireContext().toast(error)
+        })
+
+
+        viewModel.responseSuccess.observe(viewLifecycleOwner, Observer{ success ->
+            requireContext().toast(success)
+            Navigation.findNavController(binding.root).navigate(R.id.action_productDetailFragment_to_categoriesFragment)
+        })
+    }
+
+    private fun events() = with(binding) {
+        imgAdd.setOnClickListener{
+            val number = tvCant.text.toString().toInt() + 1
+            tvCant.text = "$number"
+
+        }
+        imgLess.setOnClickListener {
+            if(tvCant.text.toString().toInt() != 0){
+                val number = tvCant.text.toString().toInt() + 1
+                tvCant.text = "$number"
+            }
+        }
+
+        btnAdd.setOnClickListener {
+
+            val cart = Carrito(
+                product.uuid,
+                product.descripcion,
+                product.precio,
+                tvCant.text.toString().toInt(),
+                product.imagenes[0] ?: "",
+                uuidCategory
+            )
+            // TODO SAVE TO LOCAL DB - ROOM
+            viewModel.addToCart(cart)
+        }
 
     }
 
@@ -63,7 +125,8 @@ class ProductDetailFragment : Fragment() {
 
     private fun init() = with(binding) {
         arguments?.let { bundle ->
-            val product = ProductDetailFragmentArgs.fromBundle(bundle).product
+            product = ProductDetailFragmentArgs.fromBundle(bundle).product
+             uuidCategory = ProductDetailFragmentArgs.fromBundle(bundle).uuidCategory
 
             product?.let { product ->
                 tvDescription.text = product.descripcion

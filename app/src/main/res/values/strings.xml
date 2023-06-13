@@ -20,4 +20,12 @@
     <string name="Aceptar" />
     <string name="no_autorizado_aceptar">Aceptar</string>
     <string name="product_detail_add">Agregar</string>
+    <string name="total">TOTAL A PAGAR</string>
+    <string name="currency">S/.</string>
+    <string name="mis_compras_check_out">Check Out</string>
+    <string name="item_cart_cant">Cantidad:</string>
+    <string name="item_cart_total_cant">Total: </string>
+    <string name="edit_product_dialog_cantidad">Cantidad</string>
+    <string name="edit_product_dialog_total">Total :</string>
+    <string name="update">ACTUALIZAR</string>
 </resources>

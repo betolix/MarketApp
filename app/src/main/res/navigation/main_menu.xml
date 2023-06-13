@@ -33,11 +33,17 @@
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
-        android:name="io.h3llo.appmarket.ProductDetailFragment"
+        android:name="io.h3llo.appmarket.ui.detail.ProductDetailFragment"
         android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail" >
         <argument
             android:name="product"
             app:argType="io.h3llo.appmarket.model.Producto" />
+        <argument
+            android:name="uuidCategory"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
     </fragment>
 </navigation>

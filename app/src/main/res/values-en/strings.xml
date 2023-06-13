@@ -19,6 +19,11 @@
     <string name="Aceptar" />
     <string name="no_autorizado_aceptar">Aceptar</string>
     <string name="product_detail_add">Agregar</string>
+    <string name="total">TOTAL A PAGAR</string>
+    <string name="currency">S/.</string>
+    <string name="edit_product_dialog_cantidad">Cantidad</string>
+    <string name="edit_product_dialog_total">Total :</string>
+    <string name="update">ACTUALIZAR</string>
 
 
 </resources>

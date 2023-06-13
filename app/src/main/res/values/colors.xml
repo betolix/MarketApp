@@ -15,4 +15,6 @@
     <color name="textos">#0B8138</color>
     <color name="subtitle">#555555</color>
     <color name="background_views">#F5F6FA</color>
+
+    <color name="text_secondary">#585B62</color>
 </resources>
