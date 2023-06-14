@@ -98,9 +98,25 @@ class MisComprasFragment : Fragment() {
 
         binding.imgLessDialog.setOnClickListener{
 
+            if(binding.tvCantDialog.text.toString().toInt() > 0) {
+
+                val cantidad = binding.tvCantDialog.text.toString().toInt() - 1
+                binding.tvCantDialog.text = "$cantidad"
+
+                entity.cantidad = cantidad
+
+                var total = 0.0
+                total+=(entity.precio) * cantidad
+
+                val format = "%.2f".format(total)
+                binding.tvTotalDialog.text = format
+
+            }
         }
 
         binding.btnUpdate.setOnClickListener{
+            viewModel.updateCart(entity)
+            alertDialog.dismiss()
 
         }
 
@@ -148,7 +164,7 @@ class MisComprasFragment : Fragment() {
             adapter.update(cart)
         })
 
-        viewModel.deleteSuccess.observe(viewLifecycleOwner, Observer { messageSuccess ->
+        viewModel.success.observe(viewLifecycleOwner, Observer { messageSuccess ->
             requireContext().toast(messageSuccess)
         })
 

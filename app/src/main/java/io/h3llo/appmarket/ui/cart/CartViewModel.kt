@@ -21,8 +21,8 @@ class CartViewModel : ViewModel() {
     private var _cart = MutableLiveData<List<Carrito>>()
     val cart : LiveData<List<Carrito>> = _cart
 
-    private var _deleteSuccess = MutableLiveData<String>()
-    val deleteSuccess : LiveData<String> = _deleteSuccess
+    private var _success = MutableLiveData<String>()
+    val success : LiveData<String> = _success
 
     val getCart  = AppDatabase?.instance?.carritoDao()?.getProducts()
 
@@ -62,7 +62,32 @@ class CartViewModel : ViewModel() {
                     AppDatabase.instance?.carritoDao()?.delete(entity)
                 }
 
-                _deleteSuccess.value = "Producto eliminado"
+                _success.value = "Producto eliminado"
+
+            }catch (ex: Exception){
+                _error.value = ex.message
+
+            }finally {
+
+                _loader.value = false
+
+            }
+        }
+
+    }
+
+    fun updateCart(entity: Carrito) {
+
+        viewModelScope.launch {
+
+            _loader.value = true
+
+            try{
+                val response = withContext(Dispatchers.IO){
+                    AppDatabase.instance?.carritoDao()?.update(entity)
+                }
+
+                _success.value = "Producto actualizado"
 
             }catch (ex: Exception){
                 _error.value = ex.message
