@@ -28,4 +28,5 @@
     <string name="edit_product_dialog_cantidad">Cantidad</string>
     <string name="edit_product_dialog_total">Total :</string>
     <string name="update">ACTUALIZAR</string>
+    <string name="message_dialog_accept">ACEPTAR</string>
 </resources>

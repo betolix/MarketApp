@@ -77,7 +77,7 @@
         app:layout_constraintGuide_percent="0.8" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnCheckIn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"

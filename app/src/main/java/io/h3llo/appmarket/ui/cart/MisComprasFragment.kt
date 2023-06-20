@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso
 import io.h3llo.appmarket.MainMenuActivity
 import io.h3llo.appmarket.R
 import io.h3llo.appmarket.core.BaseAdapter
+import io.h3llo.appmarket.core.Message.showMessageAlertDialog
 import io.h3llo.appmarket.core.Message.toast
 import io.h3llo.appmarket.core.SecurityPreferences
 import io.h3llo.appmarket.core.SecurityPreferences.encryptPreferences
@@ -35,6 +36,8 @@ class MisComprasFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel : CartViewModel by viewModels()
+
+    private var cartPreview : List<Carrito> = listOf()
 
 
     private val adapter : BaseAdapter<Carrito> = object : BaseAdapter<Carrito>(emptyList()){
@@ -141,8 +144,22 @@ class MisComprasFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         init()
+        events()
         adapterSetup()
         observablesSetup()
+    }
+
+    private fun events() = with(binding) {
+
+        btnCheckIn.setOnClickListener{
+            if(cartPreview.isNotEmpty()){
+
+            }else{
+                requireContext().showMessageAlertDialog("Debe agregar al menos un producto").show()
+
+            }
+
+        }
     }
 
     private fun adapterSetup() = with(binding) {
@@ -175,6 +192,7 @@ class MisComprasFragment : Fragment() {
     private fun init() = with(binding) {
         viewModel.getCart?.observe(viewLifecycleOwner, Observer{ cart ->
 
+            cartPreview = cart
             var total = 0.0
 
             /*
